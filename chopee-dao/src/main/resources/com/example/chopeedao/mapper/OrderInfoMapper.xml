@@ -1,0 +1,484 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.chopeedao.mapper.OrderInfoMapper">
+  <resultMap id="BaseResultMap" type="com.example.chopeedao.po.OrderInfo">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="orderNum" jdbcType="CHAR" property="orderNum" />
+    <result column="customerId" jdbcType="INTEGER" property="customerId" />
+    <result column="customerName" jdbcType="VARCHAR" property="customerName" />
+    <result column="productId" jdbcType="INTEGER" property="productId" />
+    <result column="productNum" jdbcType="CHAR" property="productNum" />
+    <result column="productName" jdbcType="VARCHAR" property="productName" />
+    <result column="orderAmount" jdbcType="VARCHAR" property="orderAmount" />
+    <result column="refundAmount" jdbcType="VARCHAR" property="refundAmount" />
+    <result column="orderCreateTime" jdbcType="TIMESTAMP" property="orderCreateTime" />
+    <result column="size" jdbcType="VARCHAR" property="size" />
+    <result column="color" jdbcType="VARCHAR" property="color" />
+    <result column="amount" jdbcType="VARCHAR" property="amount" />
+    <result column="addressInfo" jdbcType="VARCHAR" property="addressInfo" />
+    <result column="expressInfo" jdbcType="VARCHAR" property="expressInfo" />
+    <result column="orderStatus" jdbcType="VARCHAR" property="orderStatus" />
+    <result column="isDelete" jdbcType="VARCHAR" property="isDelete" />
+    <result column="addTime" jdbcType="TIMESTAMP" property="addTime" />
+    <result column="updateTime" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="comment" jdbcType="VARCHAR" property="comment" />
+    <result column="addressCode" jdbcType="VARCHAR" property="addressCode" />
+    <result column="productPrice" jdbcType="VARCHAR" property="productPrice" />
+    <result column="expressPrice" jdbcType="VARCHAR" property="expressPrice" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, orderNum, customerId, customerName, productId, productNum, productName, orderAmount, 
+    refundAmount, orderCreateTime, size, color, amount, addressInfo, expressInfo, orderStatus, 
+    isDelete, addTime, updateTime, comment, addressCode, productPrice, expressPrice
+  </sql>
+  <select id="selectByExample" parameterType="com.example.chopeedao.po.OrderInfoExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    from OrderInfo
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from OrderInfo
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from OrderInfo
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.example.chopeedao.po.OrderInfo">
+    insert into OrderInfo (id, orderNum, customerId, 
+      customerName, productId, productNum, 
+      productName, orderAmount, refundAmount, 
+      orderCreateTime, size, color, 
+      amount, addressInfo, expressInfo, 
+      orderStatus, isDelete, addTime, 
+      updateTime, comment, addressCode, 
+      productPrice, expressPrice)
+    values (#{id,jdbcType=INTEGER}, #{orderNum,jdbcType=CHAR}, #{customerId,jdbcType=INTEGER}, 
+      #{customerName,jdbcType=VARCHAR}, #{productId,jdbcType=INTEGER}, #{productNum,jdbcType=CHAR}, 
+      #{productName,jdbcType=VARCHAR}, #{orderAmount,jdbcType=VARCHAR}, #{refundAmount,jdbcType=VARCHAR}, 
+      #{orderCreateTime,jdbcType=TIMESTAMP}, #{size,jdbcType=VARCHAR}, #{color,jdbcType=VARCHAR}, 
+      #{amount,jdbcType=VARCHAR}, #{addressInfo,jdbcType=VARCHAR}, #{expressInfo,jdbcType=VARCHAR}, 
+      #{orderStatus,jdbcType=VARCHAR}, #{isDelete,jdbcType=VARCHAR}, #{addTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{comment,jdbcType=VARCHAR}, #{addressCode,jdbcType=VARCHAR}, 
+      #{productPrice,jdbcType=VARCHAR}, #{expressPrice,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.chopeedao.po.OrderInfo">
+    insert into OrderInfo
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="orderNum != null">
+        orderNum,
+      </if>
+      <if test="customerId != null">
+        customerId,
+      </if>
+      <if test="customerName != null">
+        customerName,
+      </if>
+      <if test="productId != null">
+        productId,
+      </if>
+      <if test="productNum != null">
+        productNum,
+      </if>
+      <if test="productName != null">
+        productName,
+      </if>
+      <if test="orderAmount != null">
+        orderAmount,
+      </if>
+      <if test="refundAmount != null">
+        refundAmount,
+      </if>
+      <if test="orderCreateTime != null">
+        orderCreateTime,
+      </if>
+      <if test="size != null">
+        size,
+      </if>
+      <if test="color != null">
+        color,
+      </if>
+      <if test="amount != null">
+        amount,
+      </if>
+      <if test="addressInfo != null">
+        addressInfo,
+      </if>
+      <if test="expressInfo != null">
+        expressInfo,
+      </if>
+      <if test="orderStatus != null">
+        orderStatus,
+      </if>
+      <if test="isDelete != null">
+        isDelete,
+      </if>
+      <if test="addTime != null">
+        addTime,
+      </if>
+      <if test="updateTime != null">
+        updateTime,
+      </if>
+      <if test="comment != null">
+        comment,
+      </if>
+      <if test="addressCode != null">
+        addressCode,
+      </if>
+      <if test="productPrice != null">
+        productPrice,
+      </if>
+      <if test="expressPrice != null">
+        expressPrice,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="orderNum != null">
+        #{orderNum,jdbcType=CHAR},
+      </if>
+      <if test="customerId != null">
+        #{customerId,jdbcType=INTEGER},
+      </if>
+      <if test="customerName != null">
+        #{customerName,jdbcType=VARCHAR},
+      </if>
+      <if test="productId != null">
+        #{productId,jdbcType=INTEGER},
+      </if>
+      <if test="productNum != null">
+        #{productNum,jdbcType=CHAR},
+      </if>
+      <if test="productName != null">
+        #{productName,jdbcType=VARCHAR},
+      </if>
+      <if test="orderAmount != null">
+        #{orderAmount,jdbcType=VARCHAR},
+      </if>
+      <if test="refundAmount != null">
+        #{refundAmount,jdbcType=VARCHAR},
+      </if>
+      <if test="orderCreateTime != null">
+        #{orderCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="size != null">
+        #{size,jdbcType=VARCHAR},
+      </if>
+      <if test="color != null">
+        #{color,jdbcType=VARCHAR},
+      </if>
+      <if test="amount != null">
+        #{amount,jdbcType=VARCHAR},
+      </if>
+      <if test="addressInfo != null">
+        #{addressInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="expressInfo != null">
+        #{expressInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="orderStatus != null">
+        #{orderStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="isDelete != null">
+        #{isDelete,jdbcType=VARCHAR},
+      </if>
+      <if test="addTime != null">
+        #{addTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="comment != null">
+        #{comment,jdbcType=VARCHAR},
+      </if>
+      <if test="addressCode != null">
+        #{addressCode,jdbcType=VARCHAR},
+      </if>
+      <if test="productPrice != null">
+        #{productPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="expressPrice != null">
+        #{expressPrice,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByExampleSelective" parameterType="map">
+    update OrderInfo
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.orderNum != null">
+        orderNum = #{record.orderNum,jdbcType=CHAR},
+      </if>
+      <if test="record.customerId != null">
+        customerId = #{record.customerId,jdbcType=INTEGER},
+      </if>
+      <if test="record.customerName != null">
+        customerName = #{record.customerName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productId != null">
+        productId = #{record.productId,jdbcType=INTEGER},
+      </if>
+      <if test="record.productNum != null">
+        productNum = #{record.productNum,jdbcType=CHAR},
+      </if>
+      <if test="record.productName != null">
+        productName = #{record.productName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orderAmount != null">
+        orderAmount = #{record.orderAmount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.refundAmount != null">
+        refundAmount = #{record.refundAmount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orderCreateTime != null">
+        orderCreateTime = #{record.orderCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.size != null">
+        size = #{record.size,jdbcType=VARCHAR},
+      </if>
+      <if test="record.color != null">
+        color = #{record.color,jdbcType=VARCHAR},
+      </if>
+      <if test="record.amount != null">
+        amount = #{record.amount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.addressInfo != null">
+        addressInfo = #{record.addressInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.expressInfo != null">
+        expressInfo = #{record.expressInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orderStatus != null">
+        orderStatus = #{record.orderStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isDelete != null">
+        isDelete = #{record.isDelete,jdbcType=VARCHAR},
+      </if>
+      <if test="record.addTime != null">
+        addTime = #{record.addTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateTime != null">
+        updateTime = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.comment != null">
+        comment = #{record.comment,jdbcType=VARCHAR},
+      </if>
+      <if test="record.addressCode != null">
+        addressCode = #{record.addressCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productPrice != null">
+        productPrice = #{record.productPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="record.expressPrice != null">
+        expressPrice = #{record.expressPrice,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update OrderInfo
+    set id = #{record.id,jdbcType=INTEGER},
+      orderNum = #{record.orderNum,jdbcType=CHAR},
+      customerId = #{record.customerId,jdbcType=INTEGER},
+      customerName = #{record.customerName,jdbcType=VARCHAR},
+      productId = #{record.productId,jdbcType=INTEGER},
+      productNum = #{record.productNum,jdbcType=CHAR},
+      productName = #{record.productName,jdbcType=VARCHAR},
+      orderAmount = #{record.orderAmount,jdbcType=VARCHAR},
+      refundAmount = #{record.refundAmount,jdbcType=VARCHAR},
+      orderCreateTime = #{record.orderCreateTime,jdbcType=TIMESTAMP},
+      size = #{record.size,jdbcType=VARCHAR},
+      color = #{record.color,jdbcType=VARCHAR},
+      amount = #{record.amount,jdbcType=VARCHAR},
+      addressInfo = #{record.addressInfo,jdbcType=VARCHAR},
+      expressInfo = #{record.expressInfo,jdbcType=VARCHAR},
+      orderStatus = #{record.orderStatus,jdbcType=VARCHAR},
+      isDelete = #{record.isDelete,jdbcType=VARCHAR},
+      addTime = #{record.addTime,jdbcType=TIMESTAMP},
+      updateTime = #{record.updateTime,jdbcType=TIMESTAMP},
+      comment = #{record.comment,jdbcType=VARCHAR},
+      addressCode = #{record.addressCode,jdbcType=VARCHAR},
+      productPrice = #{record.productPrice,jdbcType=VARCHAR},
+      expressPrice = #{record.expressPrice,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.chopeedao.po.OrderInfo">
+    update OrderInfo
+    <set>
+      <if test="orderNum != null">
+        orderNum = #{orderNum,jdbcType=CHAR},
+      </if>
+      <if test="customerId != null">
+        customerId = #{customerId,jdbcType=INTEGER},
+      </if>
+      <if test="customerName != null">
+        customerName = #{customerName,jdbcType=VARCHAR},
+      </if>
+      <if test="productId != null">
+        productId = #{productId,jdbcType=INTEGER},
+      </if>
+      <if test="productNum != null">
+        productNum = #{productNum,jdbcType=CHAR},
+      </if>
+      <if test="productName != null">
+        productName = #{productName,jdbcType=VARCHAR},
+      </if>
+      <if test="orderAmount != null">
+        orderAmount = #{orderAmount,jdbcType=VARCHAR},
+      </if>
+      <if test="refundAmount != null">
+        refundAmount = #{refundAmount,jdbcType=VARCHAR},
+      </if>
+      <if test="orderCreateTime != null">
+        orderCreateTime = #{orderCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="size != null">
+        size = #{size,jdbcType=VARCHAR},
+      </if>
+      <if test="color != null">
+        color = #{color,jdbcType=VARCHAR},
+      </if>
+      <if test="amount != null">
+        amount = #{amount,jdbcType=VARCHAR},
+      </if>
+      <if test="addressInfo != null">
+        addressInfo = #{addressInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="expressInfo != null">
+        expressInfo = #{expressInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="orderStatus != null">
+        orderStatus = #{orderStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="isDelete != null">
+        isDelete = #{isDelete,jdbcType=VARCHAR},
+      </if>
+      <if test="addTime != null">
+        addTime = #{addTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        updateTime = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="comment != null">
+        comment = #{comment,jdbcType=VARCHAR},
+      </if>
+      <if test="addressCode != null">
+        addressCode = #{addressCode,jdbcType=VARCHAR},
+      </if>
+      <if test="productPrice != null">
+        productPrice = #{productPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="expressPrice != null">
+        expressPrice = #{expressPrice,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.chopeedao.po.OrderInfo">
+    update OrderInfo
+    set orderNum = #{orderNum,jdbcType=CHAR},
+      customerId = #{customerId,jdbcType=INTEGER},
+      customerName = #{customerName,jdbcType=VARCHAR},
+      productId = #{productId,jdbcType=INTEGER},
+      productNum = #{productNum,jdbcType=CHAR},
+      productName = #{productName,jdbcType=VARCHAR},
+      orderAmount = #{orderAmount,jdbcType=VARCHAR},
+      refundAmount = #{refundAmount,jdbcType=VARCHAR},
+      orderCreateTime = #{orderCreateTime,jdbcType=TIMESTAMP},
+      size = #{size,jdbcType=VARCHAR},
+      color = #{color,jdbcType=VARCHAR},
+      amount = #{amount,jdbcType=VARCHAR},
+      addressInfo = #{addressInfo,jdbcType=VARCHAR},
+      expressInfo = #{expressInfo,jdbcType=VARCHAR},
+      orderStatus = #{orderStatus,jdbcType=VARCHAR},
+      isDelete = #{isDelete,jdbcType=VARCHAR},
+      addTime = #{addTime,jdbcType=TIMESTAMP},
+      updateTime = #{updateTime,jdbcType=TIMESTAMP},
+      comment = #{comment,jdbcType=VARCHAR},
+      addressCode = #{addressCode,jdbcType=VARCHAR},
+      productPrice = #{productPrice,jdbcType=VARCHAR},
+      expressPrice = #{expressPrice,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

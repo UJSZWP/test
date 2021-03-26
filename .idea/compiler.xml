@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="chopee-biz" />
+        <module name="chopee-web" />
+        <module name="chopee-dao" />
+        <module name="chopee-service" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel target="8">
+      <module name="chopee" target="1.8" />
+      <module name="chopee-biz" target="1.8" />
+      <module name="chopee-dao" target="1.8" />
+      <module name="chopee-service" target="1.8" />
+      <module name="chopee-web" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="chopee" options="-parameters" />
+      <module name="chopee-biz" options="-parameters" />
+      <module name="chopee-dao" options="-parameters" />
+      <module name="chopee-service" options="-parameters" />
+      <module name="chopee-web" options="-parameters" />
+    </option>
+  </component>
+</project>

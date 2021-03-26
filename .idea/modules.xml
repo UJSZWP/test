@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/chopee.iml" filepath="$PROJECT_DIR$/chopee.iml" />
+      <module fileurl="file://$PROJECT_DIR$/chopee-biz/chopee-biz.iml" filepath="$PROJECT_DIR$/chopee-biz/chopee-biz.iml" />
+      <module fileurl="file://$PROJECT_DIR$/chopee-dao/chopee-dao.iml" filepath="$PROJECT_DIR$/chopee-dao/chopee-dao.iml" />
+      <module fileurl="file://$PROJECT_DIR$/chopee-service/chopee-service.iml" filepath="$PROJECT_DIR$/chopee-service/chopee-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/chopee-web/chopee-web.iml" filepath="$PROJECT_DIR$/chopee-web/chopee-web.iml" />
+    </modules>
+  </component>
+</project>

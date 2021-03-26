@@ -1,0 +1,437 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.chopeedao.mapper.Dict_DataMapper" >
+  <resultMap id="BaseResultMap" type="com.example.chopeedao.po.Dict_Data" >
+    <id column="Id" property="id" jdbcType="INTEGER" />
+    <result column="UnionId" property="unionId" jdbcType="BIGINT" />
+    <result column="ParentCode" property="parentCode" jdbcType="VARCHAR" />
+    <result column="DictCategoryUnionId" property="dictCategoryUnionId" jdbcType="BIGINT" />
+    <result column="Name" property="name" jdbcType="VARCHAR" />
+    <result column="Description" property="description" jdbcType="VARCHAR" />
+    <result column="BackgroundColor" property="backgroundColor" jdbcType="VARCHAR" />
+    <result column="Deprecated" property="deprecated" jdbcType="BIT" />
+    <result column="Sort" property="sort" jdbcType="BIGINT" />
+    <result column="Name2" property="name2" jdbcType="VARCHAR" />
+    <result column="Code" property="code" jdbcType="VARCHAR" />
+    <result column="Category" property="category" jdbcType="VARCHAR" />
+    <result column="AddTime" property="addTime" jdbcType="TIMESTAMP" />
+    <result column="UpdateTime" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="IsDelete" property="isDelete" jdbcType="BIT" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.example.chopeedao.po.Dict_Data" extends="BaseResultMap" >
+    <result column="ext" property="ext" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    Id, UnionId, ParentCode, DictCategoryUnionId, Name, Description, BackgroundColor, 
+    Deprecated, Sort, Name2, Code, Category, AddTime, UpdateTime, IsDelete
+  </sql>
+  <sql id="Blob_Column_List" >
+    ext
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.example.chopeedao.po.Dict_DataExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from Dict_Data
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.example.chopeedao.po.Dict_DataExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    from Dict_Data
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from Dict_Data
+    where Id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from Dict_Data
+    where Id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.example.chopeedao.po.Dict_Data" >
+    insert into Dict_Data (Id, UnionId, ParentCode, 
+      DictCategoryUnionId, Name, Description, 
+      BackgroundColor, Deprecated, Sort, 
+      Name2, Code, Category, 
+      AddTime, UpdateTime, IsDelete, 
+      ext)
+    values (#{id,jdbcType=INTEGER}, #{unionId,jdbcType=BIGINT}, #{parentCode,jdbcType=VARCHAR}, 
+      #{dictCategoryUnionId,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, 
+      #{backgroundColor,jdbcType=VARCHAR}, #{deprecated,jdbcType=BIT}, #{sort,jdbcType=BIGINT}, 
+      #{name2,jdbcType=VARCHAR}, #{code,jdbcType=VARCHAR}, #{category,jdbcType=VARCHAR}, 
+      #{addTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{isDelete,jdbcType=BIT}, 
+      #{ext,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.chopeedao.po.Dict_Data" >
+    insert into Dict_Data
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        Id,
+      </if>
+      <if test="unionId != null" >
+        UnionId,
+      </if>
+      <if test="parentCode != null" >
+        ParentCode,
+      </if>
+      <if test="dictCategoryUnionId != null" >
+        DictCategoryUnionId,
+      </if>
+      <if test="name != null" >
+        Name,
+      </if>
+      <if test="description != null" >
+        Description,
+      </if>
+      <if test="backgroundColor != null" >
+        BackgroundColor,
+      </if>
+      <if test="deprecated != null" >
+        Deprecated,
+      </if>
+      <if test="sort != null" >
+        Sort,
+      </if>
+      <if test="name2 != null" >
+        Name2,
+      </if>
+      <if test="code != null" >
+        Code,
+      </if>
+      <if test="category != null" >
+        Category,
+      </if>
+      <if test="addTime != null" >
+        AddTime,
+      </if>
+      <if test="updateTime != null" >
+        UpdateTime,
+      </if>
+      <if test="isDelete != null" >
+        IsDelete,
+      </if>
+      <if test="ext != null" >
+        ext,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="unionId != null" >
+        #{unionId,jdbcType=BIGINT},
+      </if>
+      <if test="parentCode != null" >
+        #{parentCode,jdbcType=VARCHAR},
+      </if>
+      <if test="dictCategoryUnionId != null" >
+        #{dictCategoryUnionId,jdbcType=BIGINT},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="backgroundColor != null" >
+        #{backgroundColor,jdbcType=VARCHAR},
+      </if>
+      <if test="deprecated != null" >
+        #{deprecated,jdbcType=BIT},
+      </if>
+      <if test="sort != null" >
+        #{sort,jdbcType=BIGINT},
+      </if>
+      <if test="name2 != null" >
+        #{name2,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null" >
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="category != null" >
+        #{category,jdbcType=VARCHAR},
+      </if>
+      <if test="addTime != null" >
+        #{addTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isDelete != null" >
+        #{isDelete,jdbcType=BIT},
+      </if>
+      <if test="ext != null" >
+        #{ext,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update Dict_Data
+    <set >
+      <if test="record.id != null" >
+        Id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.unionId != null" >
+        UnionId = #{record.unionId,jdbcType=BIGINT},
+      </if>
+      <if test="record.parentCode != null" >
+        ParentCode = #{record.parentCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dictCategoryUnionId != null" >
+        DictCategoryUnionId = #{record.dictCategoryUnionId,jdbcType=BIGINT},
+      </if>
+      <if test="record.name != null" >
+        Name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.description != null" >
+        Description = #{record.description,jdbcType=VARCHAR},
+      </if>
+      <if test="record.backgroundColor != null" >
+        BackgroundColor = #{record.backgroundColor,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deprecated != null" >
+        Deprecated = #{record.deprecated,jdbcType=BIT},
+      </if>
+      <if test="record.sort != null" >
+        Sort = #{record.sort,jdbcType=BIGINT},
+      </if>
+      <if test="record.name2 != null" >
+        Name2 = #{record.name2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.code != null" >
+        Code = #{record.code,jdbcType=VARCHAR},
+      </if>
+      <if test="record.category != null" >
+        Category = #{record.category,jdbcType=VARCHAR},
+      </if>
+      <if test="record.addTime != null" >
+        AddTime = #{record.addTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateTime != null" >
+        UpdateTime = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.isDelete != null" >
+        IsDelete = #{record.isDelete,jdbcType=BIT},
+      </if>
+      <if test="record.ext != null" >
+        ext = #{record.ext,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update Dict_Data
+    set Id = #{record.id,jdbcType=INTEGER},
+      UnionId = #{record.unionId,jdbcType=BIGINT},
+      ParentCode = #{record.parentCode,jdbcType=VARCHAR},
+      DictCategoryUnionId = #{record.dictCategoryUnionId,jdbcType=BIGINT},
+      Name = #{record.name,jdbcType=VARCHAR},
+      Description = #{record.description,jdbcType=VARCHAR},
+      BackgroundColor = #{record.backgroundColor,jdbcType=VARCHAR},
+      Deprecated = #{record.deprecated,jdbcType=BIT},
+      Sort = #{record.sort,jdbcType=BIGINT},
+      Name2 = #{record.name2,jdbcType=VARCHAR},
+      Code = #{record.code,jdbcType=VARCHAR},
+      Category = #{record.category,jdbcType=VARCHAR},
+      AddTime = #{record.addTime,jdbcType=TIMESTAMP},
+      UpdateTime = #{record.updateTime,jdbcType=TIMESTAMP},
+      IsDelete = #{record.isDelete,jdbcType=BIT},
+      ext = #{record.ext,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update Dict_Data
+    set Id = #{record.id,jdbcType=INTEGER},
+      UnionId = #{record.unionId,jdbcType=BIGINT},
+      ParentCode = #{record.parentCode,jdbcType=VARCHAR},
+      DictCategoryUnionId = #{record.dictCategoryUnionId,jdbcType=BIGINT},
+      Name = #{record.name,jdbcType=VARCHAR},
+      Description = #{record.description,jdbcType=VARCHAR},
+      BackgroundColor = #{record.backgroundColor,jdbcType=VARCHAR},
+      Deprecated = #{record.deprecated,jdbcType=BIT},
+      Sort = #{record.sort,jdbcType=BIGINT},
+      Name2 = #{record.name2,jdbcType=VARCHAR},
+      Code = #{record.code,jdbcType=VARCHAR},
+      Category = #{record.category,jdbcType=VARCHAR},
+      AddTime = #{record.addTime,jdbcType=TIMESTAMP},
+      UpdateTime = #{record.updateTime,jdbcType=TIMESTAMP},
+      IsDelete = #{record.isDelete,jdbcType=BIT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.chopeedao.po.Dict_Data" >
+    update Dict_Data
+    <set >
+      <if test="unionId != null" >
+        UnionId = #{unionId,jdbcType=BIGINT},
+      </if>
+      <if test="parentCode != null" >
+        ParentCode = #{parentCode,jdbcType=VARCHAR},
+      </if>
+      <if test="dictCategoryUnionId != null" >
+        DictCategoryUnionId = #{dictCategoryUnionId,jdbcType=BIGINT},
+      </if>
+      <if test="name != null" >
+        Name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        Description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="backgroundColor != null" >
+        BackgroundColor = #{backgroundColor,jdbcType=VARCHAR},
+      </if>
+      <if test="deprecated != null" >
+        Deprecated = #{deprecated,jdbcType=BIT},
+      </if>
+      <if test="sort != null" >
+        Sort = #{sort,jdbcType=BIGINT},
+      </if>
+      <if test="name2 != null" >
+        Name2 = #{name2,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null" >
+        Code = #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="category != null" >
+        Category = #{category,jdbcType=VARCHAR},
+      </if>
+      <if test="addTime != null" >
+        AddTime = #{addTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        UpdateTime = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isDelete != null" >
+        IsDelete = #{isDelete,jdbcType=BIT},
+      </if>
+      <if test="ext != null" >
+        ext = #{ext,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.example.chopeedao.po.Dict_Data" >
+    update Dict_Data
+    set UnionId = #{unionId,jdbcType=BIGINT},
+      ParentCode = #{parentCode,jdbcType=VARCHAR},
+      DictCategoryUnionId = #{dictCategoryUnionId,jdbcType=BIGINT},
+      Name = #{name,jdbcType=VARCHAR},
+      Description = #{description,jdbcType=VARCHAR},
+      BackgroundColor = #{backgroundColor,jdbcType=VARCHAR},
+      Deprecated = #{deprecated,jdbcType=BIT},
+      Sort = #{sort,jdbcType=BIGINT},
+      Name2 = #{name2,jdbcType=VARCHAR},
+      Code = #{code,jdbcType=VARCHAR},
+      Category = #{category,jdbcType=VARCHAR},
+      AddTime = #{addTime,jdbcType=TIMESTAMP},
+      UpdateTime = #{updateTime,jdbcType=TIMESTAMP},
+      IsDelete = #{isDelete,jdbcType=BIT},
+      ext = #{ext,jdbcType=LONGVARCHAR}
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.chopeedao.po.Dict_Data" >
+    update Dict_Data
+    set UnionId = #{unionId,jdbcType=BIGINT},
+      ParentCode = #{parentCode,jdbcType=VARCHAR},
+      DictCategoryUnionId = #{dictCategoryUnionId,jdbcType=BIGINT},
+      Name = #{name,jdbcType=VARCHAR},
+      Description = #{description,jdbcType=VARCHAR},
+      BackgroundColor = #{backgroundColor,jdbcType=VARCHAR},
+      Deprecated = #{deprecated,jdbcType=BIT},
+      Sort = #{sort,jdbcType=BIGINT},
+      Name2 = #{name2,jdbcType=VARCHAR},
+      Code = #{code,jdbcType=VARCHAR},
+      Category = #{category,jdbcType=VARCHAR},
+      AddTime = #{addTime,jdbcType=TIMESTAMP},
+      UpdateTime = #{updateTime,jdbcType=TIMESTAMP},
+      IsDelete = #{isDelete,jdbcType=BIT}
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
